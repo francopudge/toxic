@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Toxic - Yugioh Master Duel</title>
+    <link rel="icon" type="image/png" href="logo.png" />
+    <style>
+        /* CSS LOADING SCREEN */
+        #loader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: #000;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s;
+        }
+
+        .loader-logo {
+            width: 150px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px #00ff00);
+            animation: pulse-logo 2s infinite ease-in-out;
+        }
+
+        .loader-text {
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        @keyframes pulse-logo {
+            0% { transform: scale(1); filter: drop-shadow(0 0 10px #00ff00); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 30px #00ff00); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 10px #00ff00); }
+        }
+
+        /* CSS DASAR */
+        * { box-sizing: border-box; }
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: #000000; color: white;
+            display: flex; flex-direction: column; min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        /* HEADER - STICKY */
+        header {
+            background-color: #004d00;
+            padding: 0 40px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid #00ff00;
+            box-shadow: 0 4px 15px rgba(0, 255, 0, 0.4);
+        }
+
+        .header-left { display: flex; align-items: center; }
+        .header-logo { height: 50px; margin-right: 20px; filter: drop-shadow(0 0 8px #00ff00); }
+        
+        .toxic-style {
+            color: #00ff00;
+            font-weight: 700;
+            display: flex;
+            align-items: baseline;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        .big-letter { font-size: 2.5rem; line-height: 1; }
+        .small-letter { font-size: 1.2rem; text-transform: lowercase; }
+
+        .music-btn {
+            background: transparent;
+            border: 2px solid #00ff00;
+            border-radius: 50%;
+            width: 55px; height: 55px;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+            outline: none; padding: 10px;
+        }
+
+        .music-btn img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 5px #00ff00); }
+        .music-btn.playing { background: rgba(0, 255, 0, 0.1); animation: pulse-green 1.5s infinite; }
+
+        @keyframes pulse-green {
+            0% { transform: scale(1); }
+            70% { transform: scale(1.1); box-shadow: 0 0 15px #00ff00; }
+            100% { transform: scale(1); }
+        }
+
+        /* MAIN CONTENT */
+        main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 20px; text-align: center; }
+        .main-logo { width: 180px; margin-bottom: 30px; filter: drop-shadow(0 0 15px #00ff00); }
+        .welcome-text { font-size: 2.8rem; max-width: 800px; animation: glow 2s ease-in-out infinite alternate; }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00; }
+            to { text-shadow: 0 0 20px #00ff00, 0 0 40px #008000; }
+        }
+
+        /* FOOTER - STICKY */
+        footer {
+            background-color: #004d00;
+            padding: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: sticky;
+            bottom: 0;
+            width: 100%;
+            border-top: 2px solid #00ff00;
+        }
+
+        .footer-logo { height: 30px; margin-left: 15px; filter: drop-shadow(0 0 5px #00ff00); }
+        .content-filler { height: 1000px; width: 100%; }
+
+        /* RESPONSIVE MEDIA QUERIES */
+        @media (max-width: 768px) {
+            header { padding: 0 15px; height: 70px; }
+            .header-logo { height: 35px; margin-right: 10px; }
+            .big-letter { font-size: 1.8rem; }
+            .small-letter { font-size: 0.9rem; }
+            .music-btn { width: 45px; height: 45px; padding: 8px; }
+            .main-logo { width: 130px; }
+            .welcome-text { font-size: 1.6rem; }
+            .loader-logo { width: 100px; }
+            .loader-text { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <img src="logo.png" alt="Loading..." class="loader-logo">
+        <div class="loader-text">Loading : <span id="percent">0</span>%</div>
+    </div>
+
+    <audio id="bgMusic" src="Yugioh Opening 5 Overlap Full Version HD.mp3" loop></audio>
+
+    <header>
+        <div class="header-left">
+            <img src="logo.png" alt="Logo" class="header-logo">
+            <div class="toxic-style">
+                <span class="big-letter">G</span><span class="small-letter">reen</span>
+                <span style="margin-left: 8px;"></span>
+                <span class="big-letter">T</span><span class="small-letter">oxic</span>
+            </div>
+        </div>
+        <button id="musicToggle" class="music-btn" title="Klik untuk Putar">
+            <img id="musicIcon" src="play.png" alt="Play">
+        </button>
+    </header>
+
+    <main>
+        <img src="logo.png" alt="Green Toxic Logo" class="main-logo">
+        <h2 class="welcome-text">Selamat Datang Di Website Green Toxic Yugioh Master Duel</h2>
+        <div class="content-filler">
+            
+        </div>
+    </main>
+
+    <footer>
+        <div class="toxic-style" style="font-size: 0.8rem;">
+            <span>&copy; 2026 </span>
+            <span style="margin-left: 8px;"></span>
+            <span class="big-letter" style="font-size: 1.6rem;">G</span><span class="small-letter">reen</span>
+            <span style="margin-left: 5px;"></span>
+            <span class="big-letter" style="font-size: 1.6rem;">T</span><span class="small-letter">oxic</span>
+        </div>
+        <img src="logo.png" alt="Logo" class="footer-logo">
+    </footer>
+
+    <script>
+        function startLoading() {
+            let percentDisplay = document.getElementById('percent');
+            let loader = document.getElementById('loader');
+            let count = 0;
+            let interval = setInterval(() => {
+                count++;
+                percentDisplay.innerText = count;
+                if (count >= 100) {
+                    clearInterval(interval);
+                    loader.style.opacity = '0';
+                    loader.style.visibility = 'hidden';
+                    document.body.style.overflow = 'auto';
+                }
+            }, 30);
+        }
+        window.addEventListener('load', startLoading);
+
+        const music = document.getElementById('bgMusic');
+        const btn = document.getElementById('musicToggle');
+        const iconImg = document.getElementById('musicIcon');
+
+        btn.addEventListener('click', function() {
+            if (music.paused) {
+                music.play().then(() => {
+                    iconImg.src = 'pause.png';
+                    btn.classList.add('playing');
+                }).catch(err => console.log(err));
+            } else {
+                music.pause();
+                iconImg.src = 'play.png';
+                btn.classList.remove('playing');
+            }
+        });
+    </script>
+</body>
+</html>
