@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Toxic - Yugioh Master Duel</title>
+    <title>Green Toxic - The Fallen Yugioh</title>
     <link rel="icon" type="image/png" href="logo.png" />
     <style>
-        /* CSS LOADING SCREEN */
+        /* --- CSS LOADING SCREEN --- */
         #loader {
             position: fixed;
             top: 0; left: 0;
@@ -17,41 +17,17 @@
             z-index: 9999;
             transition: opacity 0.5s ease, visibility 0.5s;
         }
+        .loader-logo { width: 150px; margin-bottom: 20px; filter: drop-shadow(0 0 10px #006400); animation: pulse-logo 2s infinite ease-in-out; }
+        .loader-text { color: #00ff00; font-family: 'Courier New', Courier, monospace; font-size: 1.5rem; font-weight: bold; text-shadow: 0 0 10px #006400; }
+        @keyframes pulse-logo { 0% { transform: scale(1); filter: drop-shadow(0 0 10px #006400); } 50% { transform: scale(1.1); filter: drop-shadow(0 0 30px #00ff00); } 100% { transform: scale(1); filter: drop-shadow(0 0 10px #006400); } }
 
-        .loader-logo {
-            width: 150px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px #00ff00);
-            animation: pulse-logo 2s infinite ease-in-out;
-        }
-
-        .loader-text {
-            color: #00ff00;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-shadow: 0 0 10px #00ff00;
-        }
-
-        @keyframes pulse-logo {
-            0% { transform: scale(1); filter: drop-shadow(0 0 10px #00ff00); }
-            50% { transform: scale(1.1); filter: drop-shadow(0 0 30px #00ff00); }
-            100% { transform: scale(1); filter: drop-shadow(0 0 10px #00ff00); }
-        }
-
-        /* CSS DASAR */
+        /* --- CSS DASAR --- */
         * { box-sizing: border-box; }
-        body {
-            margin: 0; padding: 0;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            background-color: #000000; color: white;
-            display: flex; flex-direction: column; min-height: 100vh;
-            overflow: hidden;
-        }
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, sans-serif; background-color: #000000; color: white; display: flex; flex-direction: column; min-height: 100vh; }
         
-        /* HEADER - STICKY */
+        /* --- HEADER STICKY (Sesuai Request: Selalu Mengikuti) --- */
         header {
-            background-color: #004d00;
+            background-color: #001500;
             padding: 0 40px;
             height: 80px;
             display: flex;
@@ -63,55 +39,44 @@
             border-bottom: 3px solid #00ff00;
             box-shadow: 0 4px 15px rgba(0, 255, 0, 0.4);
         }
-
         .header-left { display: flex; align-items: center; }
         .header-logo { height: 50px; margin-right: 20px; filter: drop-shadow(0 0 8px #00ff00); }
-        
-        .toxic-style {
-            color: #00ff00;
-            font-weight: 700;
-            display: flex;
-            align-items: baseline;
-            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-        }
-
+        .toxic-style { color: #00ff00; font-weight: 700; display: flex; align-items: baseline; text-shadow: 0 0 10px rgba(0, 255, 0, 0.5); }
         .big-letter { font-size: 2.5rem; line-height: 1; }
         .small-letter { font-size: 1.2rem; text-transform: lowercase; }
 
-        .music-btn {
-            background: transparent;
-            border: 2px solid #00ff00;
-            border-radius: 50%;
-            width: 55px; height: 55px;
-            cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            transition: all 0.2s ease-in-out;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
-            outline: none; padding: 10px;
-        }
-
+        .music-btn { background: transparent; border: 2px solid #00ff00; border-radius: 50%; width: 55px; height: 55px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease-in-out; box-shadow: 0 0 10px rgba(0, 255, 0, 0.3); outline: none; padding: 10px; }
         .music-btn img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 5px #00ff00); }
         .music-btn.playing { background: rgba(0, 255, 0, 0.1); animation: pulse-green 1.5s infinite; }
+        @keyframes pulse-green { 0% { transform: scale(1); } 70% { transform: scale(1.1); box-shadow: 0 0 15px #00ff00; } 100% { transform: scale(1); } }
 
-        @keyframes pulse-green {
-            0% { transform: scale(1); }
-            70% { transform: scale(1.1); box-shadow: 0 0 15px #00ff00; }
-            100% { transform: scale(1); }
-        }
+        /* --- MAIN CONTENT --- */
+        main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 60px 20px; text-align: center; }
+        .main-logo { width: 180px; margin-bottom: 20px; filter: drop-shadow(0 0 15px #00ff00); }
+        .welcome-text { font-size: 2.5rem; max-width: 800px; animation: glow 2s ease-in-out infinite alternate; margin-bottom: 10px; }
+        @keyframes glow { from { text-shadow: 0 0 10px #00ff00, 0 0 20px #006400; } to { text-shadow: 0 0 20px #00ff00, 0 0 40px #002200; } }
+        
+        .divider { width: 70%; height: 2px; background: linear-gradient(to right, transparent, #00ff00, transparent); margin: 30px 0; box-shadow: 0 0 10px #00ff00; }
 
-        /* MAIN CONTENT */
-        main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 20px; text-align: center; }
-        .main-logo { width: 180px; margin-bottom: 30px; filter: drop-shadow(0 0 15px #00ff00); }
-        .welcome-text { font-size: 2.8rem; max-width: 800px; animation: glow 2s ease-in-out infinite alternate; }
+        /* --- LEADER & CARD STYLE --- */
+        .leader-container { margin-bottom: 10px; font-family: 'Courier New', Courier, monospace; line-height: 1.2; }
+        .leader-title { color: #ffffff; font-size: 2.2rem; font-weight: bold; letter-spacing: 1px; }
+        .leader-name { color: #00ff00; font-size: 2.8rem; font-weight: 900; text-shadow: 0 0 20px #00ff00, 0 0 10px #00ff00; margin-top: 10px; }
+        
+        .card-label { color: #00ff00; font-size: 1.8rem; font-family: 'Courier New', Courier, monospace; font-weight: bold; margin-bottom: 15px; text-shadow: 0 0 10px #00ff00; }
+        
+        .deck-clickable { cursor: pointer; transition: transform 0.3s ease; max-width: 450px; border-radius: 15px; filter: drop-shadow(0 0 15px rgba(0, 255, 0, 0.2)); margin-bottom: 50px; }
+        .deck-clickable:hover { transform: scale(1.05); filter: drop-shadow(0 0 25px #00ff00); }
 
-        @keyframes glow {
-            from { text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00; }
-            to { text-shadow: 0 0 20px #00ff00, 0 0 40px #008000; }
-        }
+        /* --- MODAL --- */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.9); justify-content: center; align-items: center; }
+        .modal-content { max-width: 80%; max-height: 80%; filter: drop-shadow(0 0 30px #00ff00); animation: zoomIn 0.3s ease; }
+        @keyframes zoomIn { from { transform: scale(0); } to { transform: scale(1); } }
+        .close-modal { position: absolute; top: 20px; right: 35px; color: #00ff00; font-size: 40px; font-weight: bold; cursor: pointer; }
 
-        /* FOOTER - STICKY */
+        /* --- FOOTER STICKY (Sesuai Request: Selalu Mengikuti) --- */
         footer {
-            background-color: #004d00;
+            background-color: #001500;
             padding: 15px 0;
             display: flex;
             align-items: center;
@@ -120,26 +85,15 @@
             bottom: 0;
             width: 100%;
             border-top: 2px solid #00ff00;
+            z-index: 1000;
         }
-
         .footer-logo { height: 30px; margin-left: 15px; filter: drop-shadow(0 0 5px #00ff00); }
-        .content-filler { height: 1000px; width: 100%; }
+        .content-filler { height: 100px; width: 100%; }
 
-        /* RESPONSIVE MEDIA QUERIES */
-        @media (max-width: 768px) {
-            header { padding: 0 15px; height: 70px; }
-            .header-logo { height: 35px; margin-right: 10px; }
-            .big-letter { font-size: 1.8rem; }
-            .small-letter { font-size: 0.9rem; }
-            .music-btn { width: 45px; height: 45px; padding: 8px; }
-            .main-logo { width: 130px; }
-            .welcome-text { font-size: 1.6rem; }
-            .loader-logo { width: 100px; }
-            .loader-text { font-size: 1.1rem; }
-        }
+        @media (max-width: 768px) { .welcome-text { font-size: 1.6rem; } .leader-title { font-size: 1.4rem; } .leader-name { font-size: 1.8rem; } .deck-clickable { max-width: 300px; } header { padding: 0 15px; } }
     </style>
 </head>
-<body>
+<body style="overflow: hidden;"> 
 
     <div id="loader">
         <img src="logo.png" alt="Loading..." class="loader-logo">
@@ -157,18 +111,40 @@
                 <span class="big-letter">T</span><span class="small-letter">oxic</span>
             </div>
         </div>
-        <button id="musicToggle" class="music-btn" title="Klik untuk Putar">
+        <button id="musicToggle" class="music-btn">
             <img id="musicIcon" src="play.png" alt="Play">
         </button>
     </header>
 
     <main>
-        <img src="logo.png" alt="Green Toxic Logo" class="main-logo">
+        <img src="logo.png" alt="The Fallen Logo" class="main-logo">
         <h2 class="welcome-text">Selamat Datang Di Website Green Toxic Yugioh Master Duel</h2>
-        <div class="content-filler">
-            
+        
+        <div class="divider"></div> 
+
+        <div class="leader-container">
+            <div class="leader-title">Ketua Guild Green Toxic:</div>
+            <div class="leader-name">Ridwan Kristiadi</div>
         </div>
+        <div class="card-label">Bountiful Artemis</div>
+        <img src="artemis.jpg" alt="Deck" class="deck-clickable deck-trigger">
+
+        <div class="divider"></div>
+
+        <div class="leader-container">
+            <div class="leader-title">Ketua Guild Green Toxic:</div>
+            <div class="leader-name">Ridwan Kristiadi</div>
+        </div>
+        <div class="card-label">Bountiful Artemis</div>
+        <img src="artemis.jpg" alt="Deck" class="deck-clickable deck-trigger">
+
+        <div class="content-filler"></div>
     </main>
+
+    <div id="myModal" class="modal">
+        <span class="close-modal" id="closeBtn">&times;</span>
+        <img src="deck.png" alt="Logo Detail" class="modal-content">
+    </div>
 
     <footer>
         <div class="toxic-style" style="font-size: 0.8rem;">
@@ -192,10 +168,12 @@
                 if (count >= 100) {
                     clearInterval(interval);
                     loader.style.opacity = '0';
-                    loader.style.visibility = 'hidden';
-                    document.body.style.overflow = 'auto';
+                    setTimeout(() => {
+                        loader.style.visibility = 'hidden';
+                        document.body.style.overflow = 'auto';
+                    }, 500);
                 }
-            }, 30);
+            }, 20);
         }
         window.addEventListener('load', startLoading);
 
@@ -206,15 +184,27 @@
         btn.addEventListener('click', function() {
             if (music.paused) {
                 music.play().then(() => {
-                    iconImg.src = 'pause.png';
+                    iconImg.src = 'pause.png'; 
                     btn.classList.add('playing');
-                }).catch(err => console.log(err));
+                }).catch(err => { alert("Klik lagi!"); });
             } else {
                 music.pause();
                 iconImg.src = 'play.png';
                 btn.classList.remove('playing');
             }
         });
+
+        // Script Modal untuk banyak gambar (karena gambarnya sekarang ada dua)
+        const modal = document.getElementById("myModal");
+        const triggers = document.getElementsByClassName("deck-trigger");
+        const closeBtn = document.getElementById("closeBtn");
+
+        for (let i = 0; i < triggers.length; i++) {
+            triggers[i].onclick = function() { modal.style.display = "flex"; }
+        }
+        
+        closeBtn.onclick = function() { modal.style.display = "none"; }
+        window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
     </script>
 </body>
 </html>
